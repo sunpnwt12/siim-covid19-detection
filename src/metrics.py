@@ -1,10 +1,13 @@
 from lib.include import *
+from CONFIG import GlobalConfig
 
+cfg = GlobalConfig()
 class Metrics:
     def __init__(self, device):
-        self._reset()
         self.device = device
+        self._reset()
         
+
     def _reset(self):
         self.accuracu_list = []
         self.proba_list = []
@@ -15,8 +18,8 @@ class Metrics:
         self.AUROC = 0
         
         self.acc = Accuracy().to(self.device)
-        self.AP = AveragePrecision(num_classes=4).to(self.device)
-        self.auroc = AUROC(num_classes=4).to(self.device)
+        self.AP = AveragePrecision(num_classes=cfg.num_classes).to(self.device)
+        self.auroc = AUROC(num_classes=cfg.num_classes).to(self.device)
         
     def update(self, y_onehot, proba, pred_onehot):
         self.accuracu_list.append(self.acc(pred_onehot, y_onehot).item())

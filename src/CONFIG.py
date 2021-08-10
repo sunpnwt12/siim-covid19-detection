@@ -1,5 +1,4 @@
 from lib.include import *
-from augmentations import get_train_transforms
 
 def seed_everything(seed):
     random.seed(seed)
@@ -9,6 +8,7 @@ def seed_everything(seed):
     torch.cuda.manual_seed(seed)
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = True
+
 class GlobalConfig:
     image_size  = 512
     seed = 42
@@ -20,18 +20,21 @@ class GlobalConfig:
     # training conf
     num_epochs = 15
     lr = 0.001
-    aug = str(get_train_transforms())
     
     dry_run = True
-    run_name = 'effnetb7'
     use_wandblogger = False
+    run_name = 'effnetb7'
     wandb_groupname = 'exp1'
     
     valid_scheduler = False
-    train_schedulr = True
+    train_scheduler = True
     use_apex = False
 
     grad_accum_step = 8
 
-    folds_df_path = str(Path('../dataset/folds_df.csv'))
+    # manage path
+    cwd = Path.cwd()
+    repo_dir = cwd.parent
+    folds_df_path = repo_dir / 'dataset' / 'folds_df.csv'
+    outputs_path = repo_dir / 'outputs' / f'{run_name}'
     seed_everything(seed)

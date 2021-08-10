@@ -1,10 +1,11 @@
 from timm.models.efficientnet import tf_efficientnet_b7_ns
 from lib.include import *
-from dataset import get_train_dataset, get_valid_dataset, get_train_loader, get_valid_loader
+from dataset import get_train_dataset, get_valid_dataset, get_train_loader, get_valid_loader, get_train_transforms
 from model import Effnet, convert_silu_to_mish
 from loss import DiceBCELoss, LovaszHinge
 from metrics import Metrics, AverageMeter
 from CONFIG import GlobalConfig
+from preprocessing import prepare_local
 class Trainer:
     def __init__(self,
         model,
@@ -47,15 +48,15 @@ class Trainer:
         if self.wandblogger and not self.dry_run:
             wandb.login()
             wandb.init(project='siim-covid19-detection',
-                        name=f'{self.fold}_{self.run_name}',
+                        name=f'{self.fold}_{self.config.run_name}',
                         group=f'{self.config.wandb_groupname}',
                         tags=['study'],
                         )
 
-        self.base_dir = str(Path.cwd() / 'outputs' / f'{self.fold}_{self.run_name}')
+        self.base_dir = self.config.outputs_path
         Path(self.base_dir).mkdir(exist_ok=True)
 
-        self.log_path = str(Path(f'self.base_dir') / 'log.txt')
+        self.log_path = str(Path(self.base_dir) / 'log.txt')
 
         self._log(f'Train on device: {self.device} ({torch.__version__})')
         self._log('')
@@ -67,7 +68,7 @@ class Trainer:
         self._log(f'Mixed Precision: {self.config.use_apex}')
         self._log('')
         self._log(f'Gradient Accumulation Step: {self.config.grad_accum_step}')
-        self._log(f'Batch_size: {self.config.batch_size} ({self.config.grad_accum_step * self.config.batch_size}')
+        self._log(f'Batch_size: {self.config.batch_size} ({self.config.grad_accum_step * self.config.batch_size})')
         self._log('')
         self._log(f'Optimizer: {self.optimizer}')
         self._log(f'LR Scheduler on (Valid: {self.config.valid_scheduler}, Train: {self.config.train_scheduler})')
@@ -157,8 +158,8 @@ class Trainer:
         self.model.train()
         train_average_loss = AverageMeter()
         train_average_aux_loss = AverageMeter()
-        metrics = Metrics(device=self.device)
-
+        metrics = Metrics(self.device)
+        
         t = time.time()
 
         for step, (images, masks, targets) in enumerate(train_loader):
@@ -220,7 +221,7 @@ class Trainer:
     def _validation(self, validation_loader):
         self.model.eval()
         valid_average_loss = AverageMeter()
-        metrics = Metrics(device=self.device)
+        metrics = Metrics(self.device)
         
         t = time.time()
 
@@ -296,7 +297,7 @@ class Trainer:
 
 def run_training(cfg):
     device = torch.device('cuda:0') if torch.cuda.is_available() else torch.device('cpu')
-
+    cfg.aug = str(get_train_transforms)
     for fold in range(cfg.fold):
         
         model = Effnet(model_name=tf_efficientnet_b7_ns, pretrained=True)
@@ -320,4 +321,5 @@ def run_training(cfg):
 
 if __name__ == '__main__':
     cfg = GlobalConfig()
+    prepare_local(cfg)
     run_training(cfg)

@@ -1,15 +1,11 @@
 from lib.include import *
-from augmentations import get_train_transforms, get_valid_transforms
 from CONFIG import GlobalConfig
-
-
-
 class SiimDataset(Dataset):
     def __init__(self, df, transforms=None):
         super().__init__()
         self.df = df
-        self.image_path = self.df['train_jpg']
-        self.mask_path = self.df['train_mask']
+        self.image_path = self.df['local_train_jpg']
+        self.mask_path = self.df['local_mask_jpg']
         self.transforms = transforms
 
     def __len__(self):
@@ -50,7 +46,28 @@ class SiimDataset(Dataset):
 
 cfg = GlobalConfig()
 
-folds_df = pd.read_csv(cfg.folds_df_path)
+folds_df_path = Path(cfg.repo_dir) / 'dataset' / 'folds_df_local.csv'
+
+folds_df = pd.read_csv(folds_df_path)
+
+def get_train_transforms():
+    return A.Compose([
+        A.HorizontalFlip(p=0.5),
+        A.ShiftScaleRotate(p=0.5, shift_limit=0, rotate_limit=6),
+        A.RandomResizedCrop(p=0.5, height=cfg.image_size, width=cfg.image_size),
+        A.Cutout(num_holes=10, max_h_size=64, max_w_size=64, p=0.5),
+        A.RandomGamma(p=0.5, gamma_limit=(95, 105)),
+        A.RandomBrightnessContrast(p=0.5),
+        A.Resize(cfg.image_size, cfg.image_size),
+        ToTensorV2()
+    ])
+
+def get_valid_transforms():
+    return A.Compose([
+        A.Resize(cfg.image_size, cfg.image_size),
+        ToTensorV2()
+    ])
+
 
 def collate_fn(batch):
     return tuple(zip(*batch))

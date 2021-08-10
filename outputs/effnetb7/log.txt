@@ -1,0 +1,135 @@
+Train on device: cuda:0 (1.8.1)
+
+Fold: 0/4
+
+Augmentation: <function get_train_transforms at 0x00000237A14DC4C0>
+
+Run name: effnetb7
+Mixed Precision: False
+
+Gradient Accumulation Step: 8
+Batch_size: 4 (32
+
+Optimizer: MADGRAD (
+Parameter Group 0
+    eps: 1e-06
+    initial_lr: 0.001
+    lr: 0.001
+    momentum: 0.9
+    weight_decay: 0
+)
+Train on device: cuda:0 (1.8.1)
+
+Fold: 0/4
+
+Augmentation: <function get_train_transforms at 0x000001FC00D3C4C0>
+
+Run name: effnetb7
+Mixed Precision: False
+
+Gradient Accumulation Step: 8
+Batch_size: 4 (32
+
+Optimizer: MADGRAD (
+Parameter Group 0
+    eps: 1e-06
+    initial_lr: 0.001
+    lr: 0.001
+    momentum: 0.9
+    weight_decay: 0
+)
+LR Scheduler on (Valid: False, Train: True)
+
+Loss: CrossEntropyLoss() + (BCEWithLogitsLoss() + LovaszHinge() + DiceBCELoss())
+Train on device: cuda:0 (1.8.1)
+
+Fold: 0/4
+
+Augmentation: <function get_train_transforms at 0x000002969266C4C0>
+
+Run name: effnetb7
+Mixed Precision: False
+
+Gradient Accumulation Step: 8
+Batch_size: 4 (32)
+
+Optimizer: MADGRAD (
+Parameter Group 0
+    eps: 1e-06
+    initial_lr: 0.001
+    lr: 0.001
+    momentum: 0.9
+    weight_decay: 0
+)
+LR Scheduler on (Valid: False, Train: True)
+
+Loss: CrossEntropyLoss() + (BCEWithLogitsLoss() + LovaszHinge() + DiceBCELoss())
+Train on device: cuda:0 (1.8.1)
+
+Fold: 0/4
+
+Augmentation: <function get_train_transforms at 0x000001F9114FC4C0>
+
+Run name: effnetb7
+Mixed Precision: False
+
+Gradient Accumulation Step: 8
+Batch_size: 4 (32)
+
+Optimizer: MADGRAD (
+Parameter Group 0
+    eps: 1e-06
+    initial_lr: 0.001
+    lr: 0.001
+    momentum: 0.9
+    weight_decay: 0
+)
+LR Scheduler on (Valid: False, Train: True)
+
+Loss: CrossEntropyLoss() + (BCEWithLogitsLoss() + LovaszHinge() + DiceBCELoss())
+Train on device: cuda:0 (1.8.1)
+
+Fold: 0/4
+
+Augmentation: <function get_train_transforms at 0x00000239FBDCC4C0>
+
+Run name: effnetb7
+Mixed Precision: False
+
+Gradient Accumulation Step: 8
+Batch_size: 4 (32)
+
+Optimizer: MADGRAD (
+Parameter Group 0
+    eps: 1e-06
+    initial_lr: 0.001
+    lr: 0.001
+    momentum: 0.9
+    weight_decay: 0
+)
+LR Scheduler on (Valid: False, Train: True)
+
+Loss: CrossEntropyLoss() + (BCEWithLogitsLoss() + LovaszHinge() + DiceBCELoss())
+Train on device: cuda:0 (1.8.1)
+
+Fold: 0/4
+
+Augmentation: <function get_train_transforms at 0x0000022B8BDAC4C0>
+
+Run name: effnetb7
+Mixed Precision: False
+
+Gradient Accumulation Step: 8
+Batch_size: 4 (32)
+
+Optimizer: MADGRAD (
+Parameter Group 0
+    eps: 1e-06
+    initial_lr: 0.001
+    lr: 0.001
+    momentum: 0.9
+    weight_decay: 0
+)
+LR Scheduler on (Valid: False, Train: True)
+
+Loss: CrossEntropyLoss() + (BCEWithLogitsLoss() + LovaszHinge() + DiceBCELoss())
