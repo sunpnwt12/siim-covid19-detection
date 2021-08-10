@@ -1,6 +1,14 @@
 from lib.include import *
 from augmentations import get_train_transforms
 
+def seed_everything(seed):
+    random.seed(seed)
+    os.environ['PYTHONHASHSEED'] = str(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = True
 class GlobalConfig:
     image_size  = 512
     seed = 42
@@ -26,3 +34,4 @@ class GlobalConfig:
     grad_accum_step = 8
 
     folds_df_path = str(Path('../dataset/folds_df.csv'))
+    seed_everything(seed)

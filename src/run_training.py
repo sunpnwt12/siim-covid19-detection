@@ -5,8 +5,6 @@ from model import Effnet, convert_silu_to_mish
 from loss import DiceBCELoss, LovaszHinge
 from metrics import Metrics, AverageMeter
 from CONFIG import GlobalConfig
-from augmentations import get_train_transforms
-
 class Trainer:
     def __init__(self,
         model,
