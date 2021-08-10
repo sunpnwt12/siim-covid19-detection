@@ -90,7 +90,7 @@ Place 829th out of 1,324 teams with 91 sub
 - Example of Augmentations that worked image level
    - RandomResizedCrop, ShiftScaleRotate, HorizontalFlip, VerticalFlip,
      Blur, CLAHE, IAASharpen, IAAEmboss, RandomBrightnessContrast, Cutout
-     ()
+     (from 1st solution)
 - Sleep and exercise more
 - Add lung segmentation to channel
 
