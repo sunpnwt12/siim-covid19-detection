@@ -28,10 +28,10 @@ This is my repository for attending kaggle SIIM-FISABIO-RSNA COVID-19 Detection
 | 01/08 | 0.567  | 0.557   |
 | 03/08 | 0.583  | 0.574   |
 
-Place 829th out of 1,324 teams with 91 sub
+Place 829th out of 1,324 teams with 91 subs
 
 
-## What I could have done better during Competitions.
+## What I could have done better during the Competition.
 
 ### Tracking
 - Starting from baseline without any techniques applying could help me track how score can improve
@@ -70,8 +70,8 @@ Place 829th out of 1,324 teams with 91 sub
 - I noticed that weark class were indeterminate, atypical but I did not know how to deal with them.
 - I spent too much time on augmentations
 
-## What I learned from winner solution.
-### Study level
+## What I learned from winner solutions.
+### Study-level
 - Auxility loss could be more than 1.
 - Adding more different augmentations.
 - Resize image possibly needed to be applied **first**.
@@ -91,8 +91,8 @@ Place 829th out of 1,324 teams with 91 sub
   - the more variant of model the better
   - different augmentations on different models
   - this gave a model robustness
-- Optimizer did not have to be fancy Adam w.orks just fine.
-- CosineAnnealingLR is popular choice.
+- Optimizer did not have to be fancy Adam works just fine.
+- CosineAnnealingLR is popular choice ,and it could have given different results.
 - Increasing image size over 512 does not improve the score.
 - Example of Augmentations that worked image level
    - RandomResizedCrop, ShiftScaleRotate, HorizontalFlip, VerticalFlip,
@@ -102,7 +102,7 @@ Place 829th out of 1,324 teams with 91 sub
 - Add lung segmentation to channel
 
 
-## Image level
+## Image-level
 - predicted none class from 5 classes added to image level prediction is allowed and possibly give a boost in my case
     - I tried applying negative class instead of none class for late sub it give me 0.01 in LB and 0.004 in private (from 0.574 and 0.583 repectively)
 - removing too big and too small box somehow give a boost but need to be implemented correctly
