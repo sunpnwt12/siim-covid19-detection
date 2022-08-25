@@ -4,3 +4,4 @@ model/
 example-code/
 yolo-sample-folder-struture/
 kaggle.json
+__pycache__/

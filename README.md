@@ -41,5 +41,8 @@ coming
 ## Task
 
 - [ ] write run_inference.py
+  - made some progresses on preprocessing
+  - It might take some time to finish including test run
+    - notebook was tightly tied to the platform
 - [ ] dependencies .yaml
 - [ ] files explanation
